@@ -1,35 +1,41 @@
 #!/bin/bash
 
-SCRIPT_NAME="matrixr"
-INSTALL_PATH="/usr/local/bin/$SCRIPT_NAME"
-SOURCE_SCRIPT="matrixr.sh"  # your script filename here
+TARGET="/usr/local/bin/matrixr"
+GITHUB_RAW_URL="https://raw.githubusercontent.com/tsukum0/bash-projects/refs/heads/main/rice_linux/matrixr/matrixr.sh"
 
-echo "Installing $SCRIPT_NAME to $INSTALL_PATH..."
+echo "Install matrixr script"
+echo "Choose installation source:"
+echo "  1) Local script file"
+echo "  2) Download from GitHub (raw)"
+read -rp "Enter choice [1-2]: " choice
 
-if [ ! -f "$SOURCE_SCRIPT" ]; then
-    echo "Error: $SOURCE_SCRIPT not found in current directory."
+case "$choice" in
+  1)
+    read -rp "Enter local script file path (default ./matrixr.sh): " local_path
+    local_path=${local_path:-./matrixr.sh}
+    if [[ ! -f "$local_path" ]]; then
+      echo "Local file not found: $local_path"
+      exit 1
+    fi
+    echo "Installing from local file: $local_path"
+    sudo cp "$local_path" "$TARGET"
+    ;;
+  2)
+    echo "Downloading from GitHub: $GITHUB_RAW_URL"
+    sudo curl -fsSL "$GITHUB_RAW_URL" -o "$TARGET"
+    if [[ $? -ne 0 ]]; then
+      echo "Failed to download from GitHub."
+      exit 1
+    fi
+    ;;
+  *)
+    echo "Invalid choice."
     exit 1
-fi
+    ;;
+esac
 
-# Copy and make executable
-sudo cp "$SOURCE_SCRIPT" "$INSTALL_PATH"
-sudo chmod +x "$INSTALL_PATH"
+sudo chmod +x "$TARGET"
+echo "Installed matrixr to $TARGET"
+echo "You can run it by typing: matrixr"
 
-# Check if /usr/local/bin is in PATH
-if ! echo "$PATH" | grep -q "/usr/local/bin"; then
-    echo "/usr/local/bin is not in your PATH."
-    echo "Adding it temporarily for this session."
-    export PATH=$PATH:/usr/local/bin
-    echo "To add permanently, add the following line to your shell profile (~/.bashrc, ~/.zshrc, etc):"
-    echo "    export PATH=\$PATH:/usr/local/bin"
-fi
-
-# Test if the command is now found
-if command -v "$SCRIPT_NAME" >/dev/null 2>&1; then
-    echo "Installation successful! You can run your script with:"
-    echo "  $SCRIPT_NAME -h"
-else
-    echo "Warning: The command $SCRIPT_NAME is still not found."
-    echo "Try restarting your terminal or run:"
-    echo "  export PATH=\$PATH:/usr/local/bin"
-fi
+exit 0
