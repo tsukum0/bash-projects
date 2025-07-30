@@ -16,7 +16,7 @@ Press Ctrl+C to stop.
 
 ## Screenshot
 
-![Matrix rain effect](rice_linux/matrixr/image.png)
+![Matrix rain effect](https://github.com/tsukum0/bash-projects/blob/main/rice_linux/matrixr/image.png?raw=true)
 
 ---
 
