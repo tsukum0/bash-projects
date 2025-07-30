@@ -33,7 +33,7 @@ sudo bash matrixr_install.sh
 ### Option 2: Download via curl
 
 ```bash
-curl -L https://raw.githubusercontent.com/yourusername/matrixr/main/matrixr.sh -o matrixr.sh
+curl -L https://raw.githubusercontent.com/tsukum0/bash-projects/refs/heads/main/rice_linux/matrixr/matrixr_install.sh
 sudo bash matrixr_install.sh
 ```
 
