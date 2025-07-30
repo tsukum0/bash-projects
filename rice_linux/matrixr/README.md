@@ -76,4 +76,3 @@ MIT License ©
 ---
 
 Enjoy your matrix rain! 🌧️💚
-```
