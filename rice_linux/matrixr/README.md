@@ -16,7 +16,7 @@ Press Ctrl+C to stop.
 
 ## Screenshot
 
-![Matrix rain effect]()
+![Matrix rain effect](rice_linux/matrixr/image.png)
 
 ---
 
