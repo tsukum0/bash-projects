@@ -71,7 +71,7 @@ You can change color interactively on first run or via `--color` option.
 
 ## License
 
-MIT License ©
+MIT License © Pedro.
 
 ---
 
