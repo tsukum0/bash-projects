@@ -25,7 +25,7 @@ Press Ctrl+C to stop.
 ### Option 1: Clone via Git
 
 ```bash
-git clone https://github.com/tsukum0/bash-projects/tree/main/rice_linux/matrixr
+git clone https://github.com/tsukum0/bash-projects/tree/main/rice_linux/matrixr.git
 cd matrixr
 sudo bash matrixr_install.sh
 ```
