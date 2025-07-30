@@ -4,7 +4,7 @@
 # Press Ctrl+C to stop
 
 # ======= CONFIG SECTION =======
-# SELECTED_COLOR=0  # 0 = default terminal color, 1=black, 2=red ... 8=white
+# DEFAULT_COLOR=0  # 0 = default terminal color, 1=black, 2=red ... 8=white
 DEFAULT_COLOR=
 TRAIL_LENGTH=5
 ACTIVE_DENSITY=5
@@ -23,7 +23,6 @@ else
     SELECTED_COLOR=$DEFAULT_COLOR
 fi
 
-# Map color names to numbers for --color option
 color_name_to_num() {
     case "$1" in
         default) echo 0 ;;
@@ -63,16 +62,35 @@ prompt_for_color() {
     fi
 }
 
+#!/bin/bash
+
 reset_config() {
-    if [[ -f "$CONFIG_FILE" ]]; then
-        rm -f "$CONFIG_FILE"
-        echo "Color configuration reset to default."
+    if [[ -d "$CONFIG_DIR" ]]; then
+        rm -rf "$CONFIG_DIR"
+        echo "Color configuration and cache directory reset to default (deleted $CONFIG_DIR)."
     else
-        echo "No color configuration found, already default."
+        echo "No configuration directory found, already default."
     fi
 }
 
+show_help() {
+  echo "Usage: matrixr [OPTIONS]"
+  echo
+  echo "Options:"
+  echo "  -h, --help        Show this help message and exit"
+  echo "  --reset           Delete configuration file"
+  echo "  --color <color>   Set the color of the matrix rain"
+  echo
+  echo "Colors:"
+  echo "  default black red green yellow blue magenta cyan white or 0-8"
+}
+
 # Handle command-line arguments
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    show_help
+    exit 0
+fi
+
 if [[ "$1" == "--reset" ]]; then
     reset_config
     exit 0
@@ -99,8 +117,6 @@ fi
 if [[ ! -f "$CONFIG_FILE" ]]; then
     prompt_for_color
 fi
-
-# === Main logic unchanged ===
 
 cols=$(tput cols)
 lines=$(tput lines)
