@@ -1,0 +1,6 @@
+Spotify
+discord
+Xfce4-terminal
+code-oss
+Wrapper-2.0
+Thunar
